@@ -1,0 +1,17 @@
+{
+	"name": "IRnyc",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "North Europe",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 30,
+					"cleanup": false
+				}
+			}
+		}
+	}
+}

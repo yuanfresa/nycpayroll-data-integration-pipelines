@@ -1,0 +1,9 @@
+{
+	"name": "nyc-datafactory",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "eef2a050-874a-45a4-af5a-1af37208da94",
+		"tenantId": "9b7cbd77-6d6b-4879-8aba-63d7dfb18472"
+	}
+}

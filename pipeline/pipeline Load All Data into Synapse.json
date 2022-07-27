@@ -1,0 +1,153 @@
+{
+	"name": "pipeline Load All Data into Synapse",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow Load Emp MD",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow Load Emp MD",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_dlgen2",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-yuan-z/dirstaging"
+					},
+					"integrationRuntime": {
+						"referenceName": "IRnyc",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Data flow Load Agency MD",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow Load Agency MD",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_dlgen2",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-yuan-z/dirstaging"
+					},
+					"integrationRuntime": {
+						"referenceName": "IRnyc",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Data flow Load Title MD",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow Load Title MD",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_dlgen2",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-yuan-z/dirstaging"
+					},
+					"integrationRuntime": {
+						"referenceName": "IRnyc",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Data flow Load 2021 payroll from SQLDB",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Data flow Load Emp MD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Data flow Load Agency MD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Data flow Load Title MD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow load 2021 payroll to synapse",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_dlgen2",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnycpayroll-yuan-z/dirstaging"
+					},
+					"integrationRuntime": {
+						"referenceName": "IRnyc",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-07-27T09:13:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
