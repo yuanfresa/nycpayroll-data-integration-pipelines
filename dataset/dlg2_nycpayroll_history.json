@@ -1,5 +1,5 @@
 {
-	"name": "dlg2_nycpayroll2020",
+	"name": "dlg2_nycpayroll_history",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dlgen2",

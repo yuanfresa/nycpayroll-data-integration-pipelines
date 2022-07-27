@@ -13,10 +13,10 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "dlg2_nycpayroll2020",
+						"referenceName": "dlg2_nycpayroll_history",
 						"type": "DatasetReference"
 					},
-					"name": "sourcedlg2nycpayroll2020"
+					"name": "sourcedlg2nycpayrollhistory"
 				}
 			],
 			"sinks": [
@@ -94,8 +94,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourcedlg2nycpayroll2020",
-				"sourcedlg2nycpayroll2020, sourcesqldbpayroll2021 union(byName: true)~> unionPayroll",
+				"     ignoreNoFilesFound: false) ~> sourcedlg2nycpayrollhistory",
+				"sourcedlg2nycpayrollhistory, sourcesqldbpayroll2021 union(byName: true)~> unionPayroll",
 				"unionPayroll filter(toInteger(FiscalYear) >=$dataflow_param_fiscalyear) ~> filterFiscalYear",
 				"filterFiscalYear derive(TotalPaid = RegularGrossPaid+TotalOTPaid+TotalOtherPay) ~> derivedColumnTotalPaid",
 				"derivedColumnTotalPaid aggregate(groupBy(AgencyName,",
